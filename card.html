@@ -113,12 +113,12 @@
 </audio>
 
 <div class="card">
-    <div class="bouquet">💐🌸🌷🌹</div>
+    <div class="bouquet"></div>
 
     <h1 id="greeting"></h1>
 
     <div class="toLine">
-        To: <span id="toName"></span>
+        
     </div>
 
     <div class="message"></div>
@@ -139,8 +139,7 @@
     document.getElementById("greeting").innerText =
         "Happy Valentine’s Day, " + name + " 💘";
 
-    document.getElementById("toName").innerText = name;
-
+   
     let messageBox = document.querySelector(".message");
 
     if (status === "Yes") {
