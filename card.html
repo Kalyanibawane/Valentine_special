@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Valentine 💖</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Soft background hearts */
+        body::before {
+            content: "💗 💕 💖 💘 💝 💗 💕 💖 💘 💝";
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.05;
+            width: 200%;
+            animation: moveBg 25s linear infinite;
+        }
+
+        @keyframes moveBg {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        .card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 50px;
+            border-radius: 35px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+            width: 550px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-in-out;
+            position: relative;
+            color: #fff;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .bouquet {
+            font-size: 75px;
+            margin-bottom: 15px;
+            animation: floatBouquet 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBouquet {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .toLine {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 17px;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .heart {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+<audio id="bgMusic" autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="card">
+    <div class="bouquet"></div>
+
+    <h1 id="greeting"></h1>
+
+    <div class="toLine">
+        <span id="toName"></span>
+    </div>
+
+    <div class="message"></div>
+
+    <div class="heart">
+        From: Kalyani 💖
+    </div>
+</div>
+
+<script>
+    let name = localStorage.getItem("friendName");
+    let status = localStorage.getItem("relationshipStatus");
+
+    if(!name) {
+        name = "Bestie";
+    }
+
+    document.getElementById("greeting").innerText =
+        "Happy Valentine’s Day, " + name + " 💘";
+
+   
+
+    let messageBox = document.querySelector(".message");
+
+    if(status === "Yes") {
+        messageBox.innerHTML = `
+        You absolute legend 💘😌 <br><br>
+
+        You really thought no one would wish you? Please.  
+        As if your premium, limited-edition bestie would forget. <br><br>
+
+        Even if you're single enough to confuse Cupid,  
+        you're still one of my favorite humans. <br><br>
+
+        You may not have a Valentine,  
+        but you have me — and honestly, that’s a solid upgrade. <br><br>
+
+        Stay cool. Stay chaotic.  
+        Love you always 💖✨
+        `;
+    }
+    else {
+        messageBox.innerHTML = `
+        My taken bestie 💘✨ <br><br>
+
+        I know you’ve got your Valentine and all that cute stuff…  
+        but remember, I was here first 😌 <br><br>
+
+        I’m genuinely so happy you’ve found someone.  
+        You deserve all the love and happiness today. <br><br>
+
+        Just don’t forget your original soulmate.  
+        Always cheering for you 💖✨
+        `;
+    }
+
+    /* Floating hearts animation */
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.className = "floating";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.innerText = "💖";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 800);
+</script>
+<script>
+window.addEventListener("load", function () {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0;
+    music.play().catch(() => {
+        document.body.addEventListener("click", () => music.play(), { once: true });
+    });
+
+    let fade = setInterval(() => {
+        if (music.volume < 0.6) {
+            music.volume += 0.05;
+        } else {
+            clearInterval(fade);
+        }
+    }, 300);
+});
+</script>
+
+
+</body>
+</html>
